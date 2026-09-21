@@ -81,5 +81,9 @@ SUPABASE_ANON_KEY=your-publishable-key
 
 ## 📸 Screenshots
 <img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 58 (1)" src="https://github.com/user-attachments/assets/43e0fa58-72c2-4ced-a6dc-b3b518cf058c" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 58" src="https://github.com/user-attachments/assets/ee4362aa-092b-4142-9546-71ce7067564d" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 59 (1)" src="https://github.com/user-attachments/assets/2286166a-adf6-4272-a019-a666e83e6fad" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 59" src="https://github.com/user-attachments/assets/5c658ef2-4cc9-4a18-b31d-381eff9d6022" />
+
 
 **Demo video:** ▶ Watch the HabitHive demo:https://youtu.be/GbiZSelt0oE
