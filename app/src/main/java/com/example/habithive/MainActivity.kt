@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.*
 import com.example.habithive.data.ServiceLocator
 import com.example.habithive.ui.theme.AuthScreen
-import com.example.habithive.ui.HomeScreen
+import com.example.habithive.ui.MainScreen
 import com.example.habithive.ui.theme.HabitHiveTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,18 +15,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             HabitHiveTheme {
                 val nav = rememberNavController()
-                val start = if (ServiceLocator.session.isLoggedIn) "home" else "auth"
+                val start = if (ServiceLocator.session.isLoggedIn) "main" else "auth"
 
                 NavHost(navController = nav, startDestination = start) {
                     composable("auth") {
                         AuthScreen(onAuthed = {
-                            nav.navigate("home") { popUpTo("auth") { inclusive = true } }
+                            nav.navigate("main") { popUpTo("auth") { inclusive = true } }
                         })
                     }
-                    composable("home") {
-                        HomeScreen(onLogout = {
+                    composable("main") {
+                        MainScreen(onLogout = {
                             ServiceLocator.session.clear()
-                            nav.navigate("auth") { popUpTo("home") { inclusive = true } }
+                            nav.navigate("auth") { popUpTo("main") { inclusive = true } }
                         })
                     }
                 }

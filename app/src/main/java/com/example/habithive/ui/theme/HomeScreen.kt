@@ -16,16 +16,10 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
     var editing by remember { mutableStateOf<HabitUi?>(null) }
     var nameInput by remember { mutableStateOf("") }
 
-    Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(onClick = { nameInput = ""; showAdd = true }) {
-                Text("+", style = MaterialTheme.typography.headlineSmall)
-            }
-        }
-    ) { padding ->
-        Column(Modifier.padding(padding).fillMaxSize().padding(16.dp)) {
+    Box(Modifier.fillMaxSize()) {
 
-            // simple header
+        Column(Modifier.fillMaxSize().padding(16.dp)) {
+
             Row(
                 Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -61,20 +55,27 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
                                 Text("🔥 ${ui.streak} day streak",
                                     style = MaterialTheme.typography.bodySmall)
                             }
-                            TextButton(onClick = {
-                                editing = ui; nameInput = ui.habit.name
-                            }) { Text("Edit") }
-                            TextButton(onClick = {
-                                ui.habit.id?.let { vm.deleteHabit(it) }
-                            }) { Text("Delete") }
+                            TextButton(onClick = { editing = ui; nameInput = ui.habit.name }) {
+                                Text("Edit")
+                            }
+                            TextButton(onClick = { ui.habit.id?.let { vm.deleteHabit(it) } }) {
+                                Text("Delete")
+                            }
                         }
                     }
                 }
             }
         }
+
+        // + button floats bottom-right (no Scaffold needed here anymore)
+        FloatingActionButton(
+            onClick = { nameInput = ""; showAdd = true },
+            modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)
+        ) {
+            Text("+", style = MaterialTheme.typography.headlineSmall)
+        }
     }
 
-    // add / edit dialog (shared)
     if (showAdd || editing != null) {
         val isEdit = editing != null
         AlertDialog(
