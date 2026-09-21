@@ -40,6 +40,7 @@ class AuthViewModel : ViewModel() {
                 // save the token + user id for future REST calls
                 ServiceLocator.session.accessToken = resp.accessToken
                 ServiceLocator.session.userId = resp.user?.id
+                ServiceLocator.session.userEmail = resp.user?.email
                 Log.d("AUTH", "Signed in as ${resp.user?.email}")
                 success = true
             } catch (e: Exception) {

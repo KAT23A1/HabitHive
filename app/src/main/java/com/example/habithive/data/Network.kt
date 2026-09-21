@@ -19,7 +19,10 @@ class SessionManager(context: Context) {
         set(v) { prefs.edit().putString("uid", v).apply() }
     val isLoggedIn get() = accessToken != null
     fun clear() { prefs.edit().clear().apply() }
+    var userEmail: String? get() = prefs.getString("email", null)
+        set(v) { prefs.edit().putString("email", v).apply() }
 }
+
 
 // Supabase Auth endpoints (register + login)
 interface AuthApi {

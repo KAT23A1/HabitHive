@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HabitHiveTheme {
+            HabitHiveTheme(darkTheme = com.example.habithive.data.ThemeState.isDark) {
                 val nav = rememberNavController()
                 val start = if (ServiceLocator.session.isLoggedIn) "main" else "auth"
 

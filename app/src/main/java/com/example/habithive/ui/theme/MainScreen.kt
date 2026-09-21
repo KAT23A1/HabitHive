@@ -14,16 +14,16 @@ fun MainScreen(onLogout: () -> Unit) {
         bottomBar = {
             NavigationBar {
                 NavigationBarItem(
-                    selected = tab == 0,
-                    onClick = { tab = 0 },
-                    icon = { Text("🏠") },
-                    label = { Text("Home") }
+                    selected = tab == 0, onClick = { tab = 0 },
+                    icon = { Text("🏠") }, label = { Text("Home") }
                 )
                 NavigationBarItem(
-                    selected = tab == 1,
-                    onClick = { tab = 1 },
-                    icon = { Text("📊") },
-                    label = { Text("Stats") }
+                    selected = tab == 1, onClick = { tab = 1 },
+                    icon = { Text("📊") }, label = { Text("Stats") }
+                )
+                NavigationBarItem(
+                    selected = tab == 2, onClick = { tab = 2 },
+                    icon = { Text("⚙️") }, label = { Text("Settings") }
                 )
             }
         }
@@ -32,6 +32,7 @@ fun MainScreen(onLogout: () -> Unit) {
             when (tab) {
                 0 -> HomeScreen(onLogout = onLogout)
                 1 -> StatsScreen()
+                2 -> SettingsScreen(onLogout = onLogout)
             }
         }
     }
