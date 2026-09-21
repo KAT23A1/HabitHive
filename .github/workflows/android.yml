@@ -1,0 +1,36 @@
+name: Android CI
+
+# run this automatically on every push and pull request to main/master
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. get your code
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      # 2. install Java 17 (required by modern Android Gradle)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 3. make the Gradle wrapper runnable
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      # 4. run the unit tests (this executes StreaksTest)
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest
+
+      # 5. build the app to confirm it compiles
+      - name: Build the app
+        run: ./gradlew assembleDebug
