@@ -3,7 +3,7 @@
 An offline-first–inspired **habit tracker** for Android, built for OPSC6312 (Part 2 – App Prototype Development).
 
 **Author:** Katleho Khutsoane (ST10442069)
-**Demo video:** <paste your unlisted YouTube link here>
+**Demo video:**https://youtu.be/GbiZSelt0oE
 
 ---
 
@@ -68,6 +68,8 @@ Unit tests for the streak logic live in `app/src/test/`. A GitHub Actions workfl
 (`.github/workflows/android.yml`) runs on every push: it installs JDK 17, runs the
 unit tests (`./gradlew testDebugUnitTest`) and builds the app (`./gradlew assembleDebug`).
 The passing runs are visible under the repository's **Actions** tab.
+<img width="940" height="475" alt="image" src="https://github.com/user-attachments/assets/637f0b5f-3e08-431a-90cc-4c42c3bb011e" />
+
 
 ## 🚀 Running the project
 
@@ -84,6 +86,7 @@ SUPABASE_ANON_KEY=your-publishable-key
 <img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 58" src="https://github.com/user-attachments/assets/ee4362aa-092b-4142-9546-71ce7067564d" />
 <img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 59 (1)" src="https://github.com/user-attachments/assets/2286166a-adf6-4272-a019-a666e83e6fad" />
 <img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 59" src="https://github.com/user-attachments/assets/5c658ef2-4cc9-4a18-b31d-381eff9d6022" />
+<img width="940" height="442" alt="image" src="https://github.com/user-attachments/assets/b42af7dc-c2d7-472e-8141-aec43b0aff67" />
 
 
 **Demo video:** ▶ Watch the HabitHive demo:https://youtu.be/GbiZSelt0oE
