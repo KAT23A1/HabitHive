@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.*
 import com.example.habithive.data.ServiceLocator
-import com.example.habithive.ui.theme.AuthScreen
+import com.example.habithive.ui.theme.AuthScreen//imports
 import com.example.habithive.ui.MainScreen
 import com.example.habithive.ui.theme.HabitHiveTheme
 
