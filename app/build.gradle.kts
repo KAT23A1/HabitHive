@@ -29,8 +29,18 @@ android {
         buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"${localProps.getProperty("GOOGLE_WEB_CLIENT_ID")}\"")
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:/Users/khuts/HabitHive-release/habithive.jks")
+            storePassword = "habithive2026"
+            keyAlias = "habithive"
+            keyPassword = "habithive2026"
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
