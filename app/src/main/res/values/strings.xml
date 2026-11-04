@@ -12,6 +12,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="delete_habit_q">Delete habit?</string>
+    <string name="delete_habit_body">\"%s\" and its history will be removed.</string>
     <string name="statistics">Statistics</string>
     <string name="stats_empty">Add habits on the Home tab to see your stats.</string>
     <string name="habit_score">Habit score</string>
