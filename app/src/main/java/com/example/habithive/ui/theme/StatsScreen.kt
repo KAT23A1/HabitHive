@@ -8,8 +8,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.habithive.R
 
 @Composable
 fun StatsScreen(vm: StatsViewModel = viewModel()) {
@@ -21,31 +23,43 @@ fun StatsScreen(vm: StatsViewModel = viewModel()) {
         Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Text("Statistics", style = MaterialTheme.typography.headlineMedium)
+        Text(stringResource(R.string.statistics), style = MaterialTheme.typography.headlineMedium)
 
         if (vm.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
         vm.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
 
         if (!vm.loading && s.habitCount == 0) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Add habits on the Home tab to see your stats.")
+                Text(stringResource(R.string.stats_empty))
             }
             return@Column
         }
 
         // summary cards
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            StatCard("Habit score", "${s.habitScore}%", Modifier.weight(1f))
-            StatCard("Best streak", "${s.bestStreak} 🔥", Modifier.weight(1f))
+            StatCard(stringResource(R.string.habit_score), "${s.habitScore}%", Modifier.weight(1f))
+            StatCard(stringResource(R.string.best_streak), "${s.bestStreak} 🔥", Modifier.weight(1f))
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            StatCard("Habits", "${s.habitCount}", Modifier.weight(1f))
-            StatCard("Done this week", "${s.completionsThisWeek}", Modifier.weight(1f))
+            StatCard(stringResource(R.string.habits), "${s.habitCount}", Modifier.weight(1f))
+            StatCard(stringResource(R.string.done_this_week), "${s.completionsThisWeek}", Modifier.weight(1f))
         }
 
-        Text("This week", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.this_week), style = MaterialTheme.typography.titleMedium)
         Card(Modifier.fillMaxWidth()) {
             WeeklyBars(s.weekLabels, s.weekCounts, s.weekMax)
+        }
+
+        Spacer(Modifier.height(12.dp))
+        Text(stringResource(R.string.badges), style = MaterialTheme.typography.titleMedium)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf(3 to "🥉", 7 to "🥈", 30 to "🥇").forEach { (days, emoji) ->
+                AssistChip(
+                    onClick = {},
+                    enabled = s.bestStreak >= days,   // greyed out until earned
+                    label = { Text("$emoji ${stringResource(R.string.badge_days, days)}") }
+                )
+            }
         }
     }
 }
