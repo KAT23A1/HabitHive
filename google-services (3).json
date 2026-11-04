@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "302349367242",
+    "project_id": "habithive-85aae",
+    "storage_bucket": "habithive-85aae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302349367242:android:c20b6e4b00d5e5a1250133",
+        "android_client_info": {
+          "package_name": "com.katleho.habithive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcWgeWVM-jv47QubPS_KTSMEuCp1vW0AQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

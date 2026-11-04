@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.habithive.data.ServiceLocator
 import com.example.habithive.data.ThemeState
@@ -52,6 +53,30 @@ fun SettingsScreen(onLogout: () -> Unit) {
             }
         }
 
+        val current = androidx.appcompat.app.AppCompatDelegate.getApplicationLocales().toLanguageTags().ifEmpty { "en" }
+
+        Card(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(stringResource(R.String.language), style = MaterialTheme.typography.titleMedium)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf("en" to "English", "af" to "Afrikaans", "zu" to "isiZulu").forEach { (tag, label) ->
+                        if (current.startsWith(tag)) {
+                            Button(onClick = {}) {
+                                Text(label)
+                            }
+                        } else {
+                            OutlinedButton(onClick = {
+                                androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(
+                                    androidx.core.os.LocaleListCompat.forLanguageTags(tag)
+                                )
+                            }) {
+                                Text(label)
+                            }
+                        }
+                    }
+                }
+            }
+        }
         Spacer(Modifier.weight(1f))
 
         // ---- Log out ----

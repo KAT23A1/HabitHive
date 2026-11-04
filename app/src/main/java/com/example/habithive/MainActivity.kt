@@ -1,7 +1,7 @@
 package com.example.habithive
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.*
 import com.example.habithive.data.ServiceLocator
@@ -9,7 +9,7 @@ import com.example.habithive.ui.theme.AuthScreen//imports
 import com.example.habithive.ui.MainScreen
 import com.example.habithive.ui.theme.HabitHiveTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
