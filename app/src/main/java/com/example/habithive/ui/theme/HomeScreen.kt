@@ -83,7 +83,7 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
                                     maxLines = 1,                       // long names won't
                                     overflow = TextOverflow.Ellipsis    // break the layout
                                 )
-                                Text("🔥 ${ui.streak} day streak",
+                                Text("🔥 " + stringResource(R.string.badge_days, ui.streak),
                                     style = MaterialTheme.typography.bodySmall)
                             }
                             TextButton(onClick = { editing = ui; nameInput = ui.habit.name }) {

@@ -20,11 +20,11 @@ fun MainScreen(onLogout: () -> Unit) {
                     icon = { Text("🏠") }, label = { Text(stringResource(R.string.nav_home)) }
                 )
                 NavigationBarItem(
-                    selected = tab == 1, onClick = { tab == 1 },
+                    selected = tab == 1, onClick = { tab = 1 },
                     icon = { Text("📊") }, label = { Text(stringResource(R.string.nav_stats)) }
                 )
                 NavigationBarItem(
-                    selected = tab == 2, onClick = { tab == 2 },
+                    selected = tab == 2, onClick = { tab = 2 },
                     icon = { Text("⚙️") }, label = { Text(stringResource(R.string.settings)) }
                 )
             }
