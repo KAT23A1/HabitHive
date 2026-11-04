@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName
 // ---- Auth request/response (Supabase Auth REST) ----
 data class Credentials(val email: String, val password: String)
 
+data class IdTokenRequest(
+    val provider: String,
+    @SerializedName("id_token") val idToken: String
+)
+
 data class AuthResponse(
     @SerializedName("access_token") val accessToken: String?,
     @SerializedName("refresh_token") val refreshToken: String?,

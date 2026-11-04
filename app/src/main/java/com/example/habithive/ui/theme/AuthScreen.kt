@@ -6,17 +6,21 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.habithive.R
 
 
 @Composable
 fun AuthScreen(onAuthed: () -> Unit, vm: AuthViewModel = viewModel()) {
     var isRegister by remember { mutableStateOf(false) }
     var showPassword by remember { mutableStateOf(false) }   // password visibility toggle
+    val context = LocalContext.current
 
     // leave this screen once login/register succeeds
     LaunchedEffect(vm.success) { if (vm.success) onAuthed() }
@@ -26,15 +30,15 @@ fun AuthScreen(onAuthed: () -> Unit, vm: AuthViewModel = viewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("HabitHive", style = MaterialTheme.typography.headlineLarge)
-        Text(if (isRegister) "Create your account" else "Welcome back",
+        Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineLarge)
+        Text(stringResource(if (isRegister) R.string.create_account else R.string.welcome_back),
             style = MaterialTheme.typography.bodyMedium)
         Spacer(Modifier.height(24.dp))
 
         OutlinedTextField(
             value = vm.email,
             onValueChange = { vm.email = it },
-            label = { Text("Email") },
+            label = { Text(stringResource(R.string.email)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email), // email keyboard
             modifier = Modifier.fillMaxWidth()
@@ -43,7 +47,7 @@ fun AuthScreen(onAuthed: () -> Unit, vm: AuthViewModel = viewModel()) {
         OutlinedTextField(
             value = vm.password,
             onValueChange = { vm.password = it },
-            label = { Text("Password") },
+            label = { Text(stringResource(R.string.password)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             // show plain text only when the user chooses to
@@ -51,7 +55,7 @@ fun AuthScreen(onAuthed: () -> Unit, vm: AuthViewModel = viewModel()) {
             else PasswordVisualTransformation(),
             trailingIcon = {
                 TextButton(onClick = { showPassword = !showPassword }) {
-                    Text(if (showPassword) "Hide" else "Show")
+                    Text(stringResource(if (showPassword) R.string.hide else R.string.show))
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -60,7 +64,7 @@ fun AuthScreen(onAuthed: () -> Unit, vm: AuthViewModel = viewModel()) {
         // validation / server errors shown in red, never a crash
         vm.error?.let {
             Spacer(Modifier.height(8.dp))
-            Text(it, color = MaterialTheme.colorScheme.error)
+            Text(stringResource(it), color = MaterialTheme.colorScheme.error)
         }
 
         Spacer(Modifier.height(20.dp))
@@ -70,11 +74,18 @@ fun AuthScreen(onAuthed: () -> Unit, vm: AuthViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth()
         ) {
             if (vm.loading) CircularProgressIndicator(Modifier.size(20.dp))
-            else Text(if (isRegister) "Register" else "Log in")
+            else Text(stringResource(if (isRegister) R.string.register else R.string.log_in))
         }
 
+        Spacer(Modifier.height(8.dp))
+        OutlinedButton(
+            onClick = { vm.googleLogin(context) },
+            enabled = !vm.loading,
+            modifier = Modifier.fillMaxWidth()
+        ) { Text(stringResource(R.string.google_continue)) }
+
         TextButton(onClick = { isRegister = !isRegister; vm.error = null }) {
-            Text(if (isRegister) "Have an account? Log in" else "New here? Create an account")
+            Text(stringResource(if (isRegister) R.string.have_account else R.string.new_here))
         }
     }
 }
