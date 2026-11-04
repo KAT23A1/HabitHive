@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.habithive.data.ServiceLocator
 import com.example.habithive.data.computeStreak
+import com.example.habithive.data.habitScore
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
+import kotlin.math.roundToInt
 
 // everything the Statistics screen needs to draw
 data class StatsUi(
@@ -33,8 +35,9 @@ class StatsViewModel : ViewModel() {
         loading = true; error = null
         viewModelScope.launch {
             try {
-                val habits = ServiceLocator.restApi.getHabits()
-                val logs = ServiceLocator.restApi.getLogs()
+                ServiceLocator.repo.sync()
+                val habits = ServiceLocator.repo.habits()
+                val logs = ServiceLocator.repo.logs()
                 val today = LocalDate.now()
 
                 // last 7 days, oldest first
@@ -45,10 +48,12 @@ class StatsViewModel : ViewModel() {
                 }
                 val completionsThisWeek = weekCounts.sum()
 
-                // simple score: how much of the possible week got done
-                val possible = habits.size * 7
-                val score = if (possible > 0)
-                    (completionsThisWeek * 100 / possible).coerceAtMost(100) else 0
+                // forgiving habit score
+                val score = if (habits.isEmpty()) 0 else habits.map { h ->
+                    val dates = logs.filter { it.habitId == h.id }
+                        .mapNotNull { runCatching { LocalDate.parse(it.logDate) }.getOrNull() }.toSet()
+                    habitScore(dates, today)
+                }.average().roundToInt()
 
                 // best current streak across all habits
                 val best = habits.maxOfOrNull { h ->

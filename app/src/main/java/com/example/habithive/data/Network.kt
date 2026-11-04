@@ -18,7 +18,7 @@ class SessionManager(context: Context) {
     var userId: String? get() = prefs.getString("uid", null)
         set(v) { prefs.edit().putString("uid", v).apply() }
     val isLoggedIn get() = accessToken != null
-    fun clear() { prefs.edit().clear().apply() }
+    fun clear() { prefs.edit().remove("token").remove("uid").remove("email").apply() }
     var userEmail: String? get() = prefs.getString("email", null)
         set(v) { prefs.edit().putString("email", v).apply() }
 }
@@ -34,6 +34,12 @@ interface AuthApi {
         @Query("grant_type") grantType: String = "password",
         @Body body: Credentials
     ): AuthResponse
+
+    @POST("auth/v1/token")
+    suspend fun signInWithIdToken(
+        @Query("grant_type") grantType: String = "id_token",
+        @Body body: IdTokenRequest
+    ): AuthResponse
 }
 
 // Supabase REST (PostgREST) endpoints for habits + logs
@@ -48,6 +54,10 @@ interface RestApi {
     @Headers("Prefer: return=representation")
     @POST("rest/v1/habits")
     suspend fun addHabit(@Body habit: Habit): List<Habit>
+
+    @Headers("Prefer: resolution=merge-duplicates,return=minimal")
+    @POST("rest/v1/habits")
+    suspend fun upsertHabits(@Body items: List<Habit>): Response<Unit>
 
     @Headers("Prefer: return=representation")
     @PATCH("rest/v1/habits")
@@ -70,6 +80,10 @@ interface RestApi {
     @POST("rest/v1/habit_logs")
     suspend fun addLog(@Body log: HabitLog): List<HabitLog>
 
+    @Headers("Prefer: resolution=merge-duplicates,return=minimal")
+    @POST("rest/v1/habit_logs")
+    suspend fun upsertLogs(@Body items: List<HabitLog>): Response<Unit>
+
     @DELETE("rest/v1/habit_logs")
     suspend fun deleteLog(@Query("id") idEq: String): Response<Unit>    // pass "eq.<id>"
 }
@@ -79,6 +93,7 @@ object ServiceLocator {
     lateinit var session: SessionManager
     lateinit var authApi: AuthApi
     lateinit var restApi: RestApi
+    lateinit var repo: HabitRepository
 
     fun init(context: Context) {
         session = SessionManager(context)
@@ -105,5 +120,6 @@ object ServiceLocator {
 
         authApi = retrofit.create(AuthApi::class.java)
         restApi = retrofit.create(RestApi::class.java)
+        repo = HabitRepository(context.applicationContext, LocalDb(context.applicationContext), restApi)
     }
 }

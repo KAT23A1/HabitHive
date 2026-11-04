@@ -7,9 +7,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.habithive.R
 
 @Composable
 fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
@@ -27,8 +29,17 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("HabitHive", style = MaterialTheme.typography.headlineMedium)
-                TextButton(onClick = onLogout) { Text("Log out") }
+                Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
+                TextButton(onClick = onLogout) { Text(stringResource(R.string.log_out)) }
+            }
+            Spacer(Modifier.height(4.dp))
+            if (vm.offline || vm.pending > 0) {
+                Text(
+                    if (vm.offline) stringResource(R.string.offline_banner)
+                    else stringResource(R.string.pending_sync, vm.pending),
+                    color = MaterialTheme.colorScheme.tertiary,
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
             Spacer(Modifier.height(8.dp))
 
@@ -44,11 +55,11 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         if (vm.error != null) {
-                            Text("Couldn't load your habits.")
+                            Text(stringResource(R.string.load_failed))
                             Spacer(Modifier.height(8.dp))
-                            Button(onClick = { vm.load() }) { Text("Retry") }
+                            Button(onClick = { vm.load() }) { Text(stringResource(R.string.retry)) }
                         } else {
-                            Text("No habits yet. Tap + to add one.")
+                            Text(stringResource(R.string.no_habits))
                         }
                     }
                 }
@@ -76,10 +87,10 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
                                     style = MaterialTheme.typography.bodySmall)
                             }
                             TextButton(onClick = { editing = ui; nameInput = ui.habit.name }) {
-                                Text("Edit")
+                                Text(stringResource(R.string.edit))
                             }
                             TextButton(onClick = { deleting = ui }) {   // ask first
-                                Text("Delete")
+                                Text(stringResource(R.string.delete))
                             }
                         }
                     }
@@ -100,12 +111,12 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
         val isEdit = editing != null
         AlertDialog(
             onDismissRequest = { showAdd = false; editing = null },
-            title = { Text(if (isEdit) "Edit habit" else "New habit") },
+            title = { Text(stringResource(if (isEdit) R.string.edit_habit else R.string.new_habit)) },
             text = {
                 OutlinedTextField(
                     value = nameInput,
                     onValueChange = { nameInput = it },
-                    label = { Text("Habit name") },
+                    label = { Text(stringResource(R.string.habit_name)) },
                     singleLine = true
                 )
             },
@@ -117,10 +128,10 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
                         else vm.addHabit(nameInput)
                         showAdd = false; editing = null
                     }
-                ) { Text("Save") }
+                ) { Text(stringResource(R.string.save)) }
             },
             dismissButton = {
-                TextButton(onClick = { showAdd = false; editing = null }) { Text("Cancel") }
+                TextButton(onClick = { showAdd = false; editing = null }) { Text(stringResource(R.string.cancel)) }
             }
         )
     }
@@ -129,16 +140,16 @@ fun HomeScreen(onLogout: () -> Unit, vm: HomeViewModel = viewModel()) {
     deleting?.let { target ->
         AlertDialog(
             onDismissRequest = { deleting = null },
-            title = { Text("Delete habit?") },
-            text = { Text("\"${target.habit.name}\" and its history will be removed.") },
+            title = { Text(stringResource(R.string.delete_habit_q)) },
+            text = { Text(stringResource(R.string.delete_habit_body, target.habit.name)) },
             confirmButton = {
                 TextButton(onClick = {
                     target.habit.id?.let { vm.deleteHabit(it) }
                     deleting = null
-                }) { Text("Delete") }
+                }) { Text(stringResource(R.string.delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { deleting = null }) { Text("Cancel") }
+                TextButton(onClick = { deleting = null }) { Text(stringResource(R.string.cancel)) }
             }
         )
     }
