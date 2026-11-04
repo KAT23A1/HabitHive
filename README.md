@@ -3,7 +3,7 @@
 An offline-first–inspired **habit tracker** for Android, built for OPSC6312 (Part 2 – App Prototype Development).
 
 **Author:** Katleho Khutsoane (ST10442069)
-**Demo video:**https://youtu.be/GbiZSelt0oE
+**Demo video:**https://youtube.com/shorts/34wqVSIe5VQ?feature=share
 
 ---
 
@@ -89,4 +89,4 @@ SUPABASE_ANON_KEY=your-publishable-key
 <img width="940" height="442" alt="image" src="https://github.com/user-attachments/assets/b42af7dc-c2d7-472e-8141-aec43b0aff67" />
 
 
-**Demo video:** ▶ Watch the HabitHive demo:https://youtu.be/GbiZSelt0oE
+**Demo video:** ▶ Watch the HabitHive demo:https://youtube.com/shorts/34wqVSIe5VQ?feature=share
