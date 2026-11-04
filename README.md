@@ -82,11 +82,12 @@ SUPABASE_ANON_KEY=your-publishable-key
 4. Run the app on a device or emulator (min SDK 26).
 
 ## 📸 Screenshots
-<img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 58 (1)" src="https://github.com/user-attachments/assets/43e0fa58-72c2-4ced-a6dc-b3b518cf058c" />
-<img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 58" src="https://github.com/user-attachments/assets/ee4362aa-092b-4142-9546-71ce7067564d" />
-<img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 59 (1)" src="https://github.com/user-attachments/assets/2286166a-adf6-4272-a019-a666e83e6fad" />
-<img width="720" height="1600" alt="WhatsApp Image 2026-09-21 at 16 46 59" src="https://github.com/user-attachments/assets/5c658ef2-4cc9-4a18-b31d-381eff9d6022" />
-<img width="940" height="442" alt="image" src="https://github.com/user-attachments/assets/b42af7dc-c2d7-472e-8141-aec43b0aff67" />
+<img width="275" height="618" alt="image" src="https://github.com/user-attachments/assets/f3a824fd-1ff4-4666-8b8d-9ab645b9d011" />
+<img width="277" height="627" alt="image" src="https://github.com/user-attachments/assets/7422f34d-ba86-4496-99a4-81c88bfaf98e" />
+<img width="280" height="632" alt="image" src="https://github.com/user-attachments/assets/afac94a4-6404-45d5-8ebd-f8c4d8d84e02" />
+
+
+
 
 
 **Demo video:** ▶ Watch the HabitHive demo:https://youtube.com/shorts/34wqVSIe5VQ?feature=share
