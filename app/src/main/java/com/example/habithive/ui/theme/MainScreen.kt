@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.example.habithive.R
 
 @Composable
 fun MainScreen(onLogout: () -> Unit) {
@@ -15,15 +17,15 @@ fun MainScreen(onLogout: () -> Unit) {
             NavigationBar {
                 NavigationBarItem(
                     selected = tab == 0, onClick = { tab = 0 },
-                    icon = { Text("🏠") }, label = { Text("Home") }
+                    icon = { Text("🏠") }, label = { Text(stringResource(R.string.nav_home)) }
                 )
                 NavigationBarItem(
-                    selected = tab == 1, onClick = { tab = 1 },
-                    icon = { Text("📊") }, label = { Text("Stats") }
+                    selected = tab == 1, onClick = { tab == 1 },
+                    icon = { Text("📊") }, label = { Text(stringResource(R.string.nav_stats)) }
                 )
                 NavigationBarItem(
-                    selected = tab == 2, onClick = { tab = 2 },
-                    icon = { Text("⚙️") }, label = { Text("Settings") }
+                    selected = tab == 2, onClick = { tab == 2 },
+                    icon = { Text("⚙️") }, label = { Text(stringResource(R.string.settings)) }
                 )
             }
         }
