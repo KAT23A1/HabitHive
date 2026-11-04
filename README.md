@@ -85,6 +85,13 @@ SUPABASE_ANON_KEY=your-publishable-key
 <img width="275" height="618" alt="image" src="https://github.com/user-attachments/assets/f3a824fd-1ff4-4666-8b8d-9ab645b9d011" />
 <img width="277" height="627" alt="image" src="https://github.com/user-attachments/assets/7422f34d-ba86-4496-99a4-81c88bfaf98e" />
 <img width="280" height="632" alt="image" src="https://github.com/user-attachments/assets/afac94a4-6404-45d5-8ebd-f8c4d8d84e02" />
+In Afrikaans screenshot view
+<img width="310" height="693" alt="image" src="https://github.com/user-attachments/assets/f28d2d76-ec3b-4f9a-930d-05dd51dc3d15" />
+<img width="308" height="690" alt="image" src="https://github.com/user-attachments/assets/475e5212-0db5-44da-956f-4f8b92b345b5" />
+<img width="308" height="692" alt="image" src="https://github.com/user-attachments/assets/4d750c0e-6ba4-431f-8984-24b48a4595f5" />
+
+
+
 
 
 
